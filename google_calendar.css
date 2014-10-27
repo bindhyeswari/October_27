@@ -23,7 +23,7 @@ section > div {
 
 div.container_scheduler {
     width: calc(100% - 250px);
-    background-color: #aaa;
+    /*background-color: #aaa;*/
 }
 
 div.container_calendar {
@@ -50,5 +50,27 @@ div.half-schedule {
 
 div.half-hour {
     min-height: 25px;
-    background-color: white;
+    color: #000000;
+    background-color: #eee;
 }
+
+div.half-hour:nth-child(2) {
+    margin-top: 1px;
+}
+
+div.half-hour.selected {
+    background-color: green;
+}
+
+div.popup_display {
+    min-height: 0;
+    border: 1px solid gray;
+    box-shadow: 0 0 15px 2px gray;
+    padding: 1em;
+    position: absolute;
+    top: 200px;
+    left: 600px;
+    background-color: #ffffff;
+}
+
+

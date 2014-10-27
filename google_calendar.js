@@ -27,9 +27,26 @@ document.addEventListener('DOMContentLoaded', function () {
         var row = utils.createElement('div', '', 'row', container_scheduler);
         utils.createElement('div', i.toToStringTwoDigits() + ' hours', 'time', row);
         var schedule = utils.createElement('div', '', 'half-schedule', row);
-        utils.createElement('div', '', 'half-schedule', schedule);
-        utils.createElement('div', '', 'half-schedule', schedule);
+        for (var j = 0, len = 2; j < len; j++) {
+            utils.createElement('div', '', 'half-hour', schedule);
+        }
+
     }
+
+    container_scheduler.addEventListener('mousedown', function () {
+        container_scheduler.addEventListener('mousemove', mousemovehandler);
+    });
+
+    container_scheduler.addEventListener('mouseup', function () {
+        container_scheduler.removeEventListener('mousemove', mousemovehandler);
+    });
+
+    function mousemovehandler (event) {
+        if ( event.target.className.indexOf('half-hour') !== -1 ) {
+            event.target.className += ' selected';
+        }
+    }
+
 });
 
 
