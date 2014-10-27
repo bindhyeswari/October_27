@@ -73,4 +73,13 @@ div.popup_display {
     background-color: #ffffff;
 }
 
+div.hide {
+    display: none;
+}
+
+div.show {
+    display: block;
+}
+
+
 

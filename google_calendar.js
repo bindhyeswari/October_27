@@ -33,18 +33,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
+    var popup = document.getElementsByClassName('popup_display')[0];
+    mousemovehandler.elements = [];
+
+    // handle click event on the hyperlink
+    document.getElementById('popup_cancel').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        mousemovehandler.elements.forEach(function (element) {
+            element.className = element.className.replace(' selected', '');
+        });
+        mousemovehandler.elements = [];
+
+        popup.className = popup.className.replace(' show', '');
+
+    });
+
     container_scheduler.addEventListener('mousedown', function () {
         container_scheduler.addEventListener('mousemove', mousemovehandler);
     });
 
-    container_scheduler.addEventListener('mouseup', function () {
+    container_scheduler.addEventListener('mouseup', function (event) {
+        if ( event.target.className.indexOf('half-hour') !== -1 ) {
+            showPopup(mousemovehandler);
+        }
+
         container_scheduler.removeEventListener('mousemove', mousemovehandler);
     });
 
     function mousemovehandler (event) {
         if ( event.target.className.indexOf('half-hour') !== -1 ) {
-            event.target.className += ' selected';
+            if ( event.target.className.indexOf('selected') === -1 ) event.target.className += ' selected';
+            if ( mousemovehandler.elements.indexOf(event.target) === -1 ) mousemovehandler.elements.push(event.target); // clean this up
         }
+    }
+
+    function showPopup(mousemovehandler) {
+
+        if ( mousemovehandler.elements.length === 0 ) return;
+        var o = mousemovehandler.elements[0].offsetTop,
+            h = popup.offsetHeight,
+            margin = 5;
+
+        console.log(o - h);
+        popup.style.top = o - h - margin + 'px';
+        popup.className += ' show';
+
+        console.log(mousemovehandler.elements);
+
     }
 
 });
