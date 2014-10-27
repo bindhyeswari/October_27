@@ -13,6 +13,8 @@ var utils = {
     }
 };
 
+var tasks = [];
+
 Number.prototype.toToStringTwoDigits = function () {
     if (this.toString().length === 1) return '0' + this.toString();
     else return this.toString();
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         utils.createElement('div', i.toToStringTwoDigits() + ' hours', 'time', row);
         var schedule = utils.createElement('div', '', 'half-schedule', row);
         for (var j = 0, len = 2; j < len; j++) {
-            utils.createElement('div', '', 'half-hour', schedule);
+            utils.createElement('div', '', 'half-hour', schedule).setAttribute('data-start', i + j * 0.5);
         }
 
     }
@@ -43,6 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
         mousemovehandler.elements.forEach(function (element) {
             element.className = element.className.replace(' selected', '');
         });
+
+
+        console.log('start time is: ' + mousemovehandler.elements[0].dataset.start);
+        console.log('end time is: ' + (+mousemovehandler.elements[mousemovehandler.elements.length - 1].dataset.start + 0.5));
         mousemovehandler.elements = [];
 
         popup.className = popup.className.replace(' show', '');
@@ -75,8 +81,10 @@ document.addEventListener('DOMContentLoaded', function () {
             h = popup.offsetHeight,
             margin = 5;
 
-        console.log(o - h);
+        console.log(o);
+        console.log(h);
         popup.style.top = o - h - margin + 'px';
+        console.log( o - h - margin );
         popup.className += ' show';
 
         console.log(mousemovehandler.elements);
