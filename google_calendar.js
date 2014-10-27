@@ -13,6 +13,15 @@ var utils = {
     }
 };
 
+function randcolor () {
+    return 'rgb(' + getRandom({start: 0, end: 255}) + ',' + getRandom({start: 0, end: 255}) +',' + getRandom({start: 0, end: 255}) + ')';
+}
+
+function getRandom(interval) {
+    // interval is an object with a start and an end
+    return Math.round(interval.start + Math.random() * (interval.end - interval.start));
+}
+
 var tasks = [];
 
 Number.prototype.toToStringTwoDigits = function () {
